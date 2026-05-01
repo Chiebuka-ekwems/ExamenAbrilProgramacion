@@ -1,0 +1,153 @@
+# Examen de Programación Java
+
+## Gestión de una Inmobiliaria
+
+Desarrolla una aplicación en Java para consola que permita gestionar una inmobiliaria mediante arquitectura en tres capas:
+
+* Vista → interacción con el usuario usando `Scanner` y `System.out.println`
+* Controlador → clase **Singleton**
+* Modelo → clases de negocio y almacenamiento de datos
+
+---
+
+# Objetivo del proyecto
+
+La aplicación representará el funcionamiento básico de una inmobiliaria que dispone de inmuebles en venta y clientes interesados.
+
+Existen dos tipos de inmuebles:
+
+* **Casa**
+* **Piso**
+
+Todos los inmuebles comparten información común, pero cada tipo tendrá además algún atributo propio.
+
+---
+
+# Requisitos obligatorios
+
+## 1. Arquitectura del proyecto
+
+El proyecto debe estar organizado en paquetes:
+
+* `vista`
+* `controlador`
+* `modelo`
+
+---
+
+## 2. Modelo de datos
+
+### Clase abstracta `Inmueble`
+
+Debe contener como mínimo:
+
+* código identificador
+* dirección
+* metros cuadrados
+* precio
+
+### Clase `Casa`
+
+Hereda de `Inmueble` y añade:
+
+* número de plantas
+* tiene jardín (sí/no)
+
+### Clase `Piso`
+
+Hereda de `Inmueble` y añade:
+
+* planta
+* tiene ascensor (sí/no)
+
+---
+
+## 3. Clientes
+
+Clase `Cliente` con:
+
+* dni
+* nombre
+* teléfono
+* lista de inmuebles favoritos (vacía inicialmente)
+
+Cada cliente podrá guardar inmuebles favoritos.
+
+---
+
+## 4. Almacenaremos en el Controlador:
+
+* colección de inmuebles en venta
+* colección de clientes
+
+Puedes usar `ArrayList`, `HashSet`, `HashMap` o estructuras similares, a tu decisión
+
+---
+
+# Funcionalidades obligatorias
+
+## Gestión de inmuebles
+
+El menú principal permitirá:
+
+1. Dar de alta un inmueble para vender
+   (el usuario elegirá si es Casa o Piso)
+2. Retirar un inmueble vendido del sistema
+3. Mostrar todos los inmuebles
+4. Mostrar sólo las casas
+5. Mostrar sólo los pisos
+6. Dar de alta cliente
+7. Añadir inmueble favorito a un cliente
+8. Mostrar favoritos de un cliente
+0. Salir del programa
+
+---
+
+# Uso obligatorio de `Comparator`
+
+Para todos los listados de inmuebles se debe permitir ordenar mediante `Comparator`.
+
+Debes crear comparadores:
+
+* por precio ascendente (casas y pisos, listado de todos los inmuebles)
+* por metros cuadrados (casas)
+* por planta (pisos)
+
+
+# Controlador Singleton
+
+La clase controlador debe implementarse como **Singleton**
+
+# Vista
+
+Toda la interacción será en modo texto usando:
+
+Scanner
+System.out.println()
+
+Debe existir un menú repetitivo hasta seleccionar salir.
+
+# Validaciones mínimas
+
+* No permitir códigos de inmueble repetidos.
+* No permitir DNI repetidos.
+* No añadir favoritos inexistentes.
+* No retirar inmuebles que no existan.
+* No añadir dos veces el mismo favorito al mismo cliente.
+
+
+# Entrega
+
+Entregar proyecto Java completo y ejecutable.
+
+---
+
+# EVALUACION
+
+- Modelo: Inmueble, Casa, Piso 2p
+- Cada opción del menú (excepto salir): 1p
+
+Total 2+8=10 puntos. Para aprobar, 5p.
+
+Pregunta a Papel:
+- Programa un método conJardin, suponiendo que tenemos una List de inmuebles en el controlador llamada List<Inmueble> miLista que devuelve sólo las casas que tengan jardín en un Map<String,Casa> donde String representa al código del inmueble.
