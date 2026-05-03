@@ -68,10 +68,10 @@ public class GestorArchivosTexto {
         try {
             in = new Scanner(new FileReader(nomFich));
 
-
+            String linea="";
             while (in.hasNextLine()) {
                 //para las lineas vacias
-                String linea = in.nextLine().trim();
+                linea = in.nextLine().trim();
                 if(!linea.isEmpty()){
                     char primeraLetra = linea.charAt(0);
                     switch (primeraLetra){
@@ -124,28 +124,23 @@ public class GestorArchivosTexto {
 
                             break;
                     }
-
-                    Gson gson = new Gson();
-
-                    switch (opcion) {
-                        case 1:
-                            return gson.toJson(mapaClientes.values());
-                        case 2:
-                            return gson.toJson(mapaProductos.values());
-                        case 3:
-                            return gson.toJson(listaPedidos);
-                        default:
-                            contenidoLeido.append(linea).append("\n");
-                            return "Opción no válida. Usa 1 para Clientes, 2 para Productos, 3 para Pedidos.";
-
-                    }
-
-
                 }
 
             }
+            Gson gson = new Gson();
+            switch (opcion) {
+                case 1:
+                    return gson.toJson(mapaClientes.values());
+                case 2:
+                    return gson.toJson(mapaProductos.values());
+                case 3:
+                    return gson.toJson(listaPedidos);
+                default:
+                    contenidoLeido.append(linea).append("\n");
+                    return "Opción no válida. Usa 1 para Clientes, 2 para Productos, 3 para Pedidos.";
 
-            return contenidoLeido.toString();
+            }
+
 
         } catch (FileNotFoundException e) { // Si el fichero no existe lanza FileNotFoundException
             System.err.println("Fichero no encontrado: " + e.getMessage());
