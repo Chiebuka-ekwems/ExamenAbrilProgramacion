@@ -1,9 +1,14 @@
 package com.politecnicomalaga;
 
+import com.politecnicomalaga.controller.Controlador;
+
 public class Main {
     public static void main(String[] args) {
 
-        System.out.printf("Crea el código necesario para abrir el fichero CSV y mandar los datos al server!");
+        // Opcion 1=CLiente  2=Productos  3=Pedidos
+        String jsonCliente = new Controlador().recibirDatos(1);
+        String jsonProducto = new Controlador().recibirDatos(2);
+        String jsonPedido = new Controlador().recibirDatos(3);
 
     }
 }
