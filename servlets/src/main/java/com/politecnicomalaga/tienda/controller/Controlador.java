@@ -59,9 +59,18 @@ public class Controlador implements DataAccess{
                 bbdd.insertarCliente(new Cliente(dni, nombre, apellidos, email, telefono, direccion));
 
             }catch (SQLException se){
+                // 1. Imprime el error exacto en la consola de Tomcat/Docker
+                System.err.println("Error de Base de Datos al insertar el cliente " + dni + ": " + se.getMessage());
+                se.printStackTrace();
+                return "ERROR";
 
 
             }catch (ClassNotFoundException ce){
+                // 1. Imprime el error si falta el driver de MySQL
+                System.err.println("Error: No se encuentra el Driver de MySQL: " + ce.getMessage());
+                ce.printStackTrace();
+
+                return "ERROR";
 
             }
 
