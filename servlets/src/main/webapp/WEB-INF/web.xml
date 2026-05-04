@@ -6,11 +6,12 @@
          version="4.0">
 
   <servlet>
-    <servlet-name>EjemploServlet</servlet-name>
-    <servlet-class>com.politecnicomalaga.tienda.view.EjemploServlet</servlet-class>
+    <servlet-name>ImportarDatosServlet</servlet-name>
+    <servlet-class>com.politecnicomalaga.tienda.view.ImportarDatosServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>EjemploServlet</servlet-name>
-    <url-pattern>/ejemplo</url-pattern>
+    <servlet-name>ImportarDatosServlet</servlet-name>
+    <url-pattern>/importar</url-pattern>
   </servlet-mapping>
+
 </web-app>
