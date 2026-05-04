@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class ConexionServlet {
     public ConexionServlet(){}
-    private String url="http://192.168.10.174:8888/tiendaServelts/importar";
+    private String url="http://localhost:8888/tiendaServlets/importar";
 
     public void enviarDatosAServidor(String json){
         OkHttpClient client = new OkHttpClient();

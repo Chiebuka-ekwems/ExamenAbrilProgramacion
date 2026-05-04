@@ -60,6 +60,7 @@ public class Controlador implements DataAccess{
 
             }catch (SQLException se){
 
+
             }catch (ClassNotFoundException ce){
 
             }
