@@ -9,14 +9,19 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class ListarProductosServlet extends HttpServlet {
+public class BuscarProductoxCodeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String codigo=request.getParameter("id_producto");
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
 
-        out.println((new Controlador()).listAllProducts());
-    }
+        if(codigo != null && !codigo.isEmpty()){
+            out.println((new Controlador()).findProductoXCodigo(codigo));
+        }else{
+            out.println("{\"error\": \"Debe proporcionar un codigo de producto\"}");
+        }
 
+    }
 }

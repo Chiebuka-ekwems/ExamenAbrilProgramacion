@@ -14,4 +14,33 @@
     <url-pattern>/importar</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>ListarProductosServlet</servlet-name>
+    <servlet-class>com.politecnicomalaga.tienda.view.ListarProductosServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListarProductosServlet</servlet-name>
+    <url-pattern>/listarProductos</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>BuscarProductoxCodeServlet</servlet-name>
+    <servlet-class>com.politecnicomalaga.tienda.view.BuscarProductoxCodeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BuscarProductoxCodeServlet</servlet-name>
+    <url-pattern>/buscarProducto</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>BuscarClientexDniServlet</servlet-name>
+    <servlet-class>com.politecnicomalaga.tienda.view.BuscarClientexDniServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BuscarClientexDniServlet</servlet-name>
+    <url-pattern>/buscarCliente</url-pattern>
+  </servlet-mapping>
+
+
+
 </web-app>

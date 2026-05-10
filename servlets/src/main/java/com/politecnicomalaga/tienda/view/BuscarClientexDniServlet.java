@@ -9,14 +9,19 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class ListarProductosServlet extends HttpServlet {
+public class BuscarClientexDniServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String dni=request.getParameter("dni");
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
 
-        out.println((new Controlador()).listAllProducts());
-    }
+        if(dni != null && !dni.isEmpty()){
+            out.println((new Controlador()).findClienteXDNI(dni));
+        }else{
+            out.println("{\"error\": \"Debe proporcionar un codigo de producto\"}");
+        }
 
+    }
 }

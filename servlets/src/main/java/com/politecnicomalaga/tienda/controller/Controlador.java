@@ -26,12 +26,32 @@ public class Controlador implements DataAccess{
 
     @Override
     public String findProductoXCodigo(String code){
-        return "Por hacer";
+        BBDDAccess bbdd = new BBDDAccess();
+
+        try{
+            int id = Integer.parseInt(code);
+            Producto p = bbdd.buscarProductoxCode(id);
+            return (new Gson()).toJson(p);
+        }catch (SQLException se) {
+            return "List Products: " + se.getMessage();
+        } catch (ClassNotFoundException c) {
+            return "List Products: " + c.getMessage();
+        }
+
     };
 
     @Override
     public String findClienteXDNI(String dni){
-        return "Por hacer";
+        BBDDAccess bbdd = new BBDDAccess();
+
+        try{
+           Cliente c = bbdd.buscarClientexDni(dni);
+            return (new Gson()).toJson(c);
+        }catch (SQLException se) {
+            return "List Products: " + se.getMessage();
+        } catch (ClassNotFoundException c) {
+            return "List Products: " + c.getMessage();
+        }
     };
 
     @Override
@@ -186,6 +206,20 @@ public class Controlador implements DataAccess{
 
         return "Okay";
 
+
+    }
+
+    public String listAllProducts() {
+        BBDDAccess bbdd = new BBDDAccess();
+
+        try{
+            List<Producto> listaProd = bbdd.listarTodos();
+            return (new Gson()).toJson(listaProd);
+        }catch (SQLException se) {
+            return "List Products: " + se.getMessage();
+        } catch (ClassNotFoundException c) {
+            return "List Products: " + c.getMessage();
+        }
 
     }
 }
