@@ -142,28 +142,70 @@ public class BBDDAccess {
     }
 
 
-    public Cliente buscarClientexDni(String dni) throws SQLException, ClassNotFoundException{
+    public List<Cliente> buscarClientexDni(String dni) throws SQLException, ClassNotFoundException{
         Connection conn = null;
         PreparedStatement pstmt = null;
+        List<Cliente> listaResultado = new ArrayList<>();
 
         conn = ConexionBD.getConnection();
+        String sql="";
 
         // Productos normales
-        String sql = "SELECT dni, nombre, apellidos, email, telefono, direccion from clientes where dni=?";
+        if(dni!=null){
+             sql = "SELECT dni, nombre, apellidos, email, telefono, direccion from clientes where dni=?";
+        }else{
+            sql = "SELECT dni, nombre, apellidos, email, telefono, direccion from clientes";
+        }
+
 
         pstmt = conn.prepareStatement(sql);
-        pstmt.setString(1, dni);
+        if(dni!=null) {
+            pstmt.setString(1, dni);
+        }
 
         ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
-            return (new Cliente(rs.getString("dni"),
+            listaResultado.add(new Cliente(rs.getString("dni"),
                     rs.getString("nombre"),
                     rs.getString("apellidos"),
                     rs.getString("email"),
                     rs.getString("telefono"),
                     rs.getString("direccion")));
         }
-        return null;
+        return listaResultado;
+
     }
+
+    public List<Producto> listarProductoxPedido(String dni, String pedido) throws SQLException, ClassNotFoundException {
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        List<Producto> listaResultado = new ArrayList<>();
+
+        conn = ConexionBD.getConnection();
+
+        // Productos normales
+        String sql = "select p.id_producto, p.descripcion, p.precio_unitario " +
+                "from productos p " +
+                "inner join lineas_pedido le on p.id_producto = le.id_producto " +
+                "inner join pedidos pe on le.id_pedido = pe.id_pedido " +
+                "where le.id_pedido = ? and pe.dni_cliente = ?";
+
+
+
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, pedido);
+        pstmt.setString(2, dni);
+
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+            listaResultado.add(new Producto(rs.getInt("id_producto"),
+                    rs.getString("descripcion"),
+                    rs.getFloat("precio_unitario")));
+        }
+        return listaResultado;
+    }
+
+
 
 }

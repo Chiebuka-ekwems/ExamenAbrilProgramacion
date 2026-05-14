@@ -45,8 +45,8 @@ public class Controlador implements DataAccess{
         BBDDAccess bbdd = new BBDDAccess();
 
         try{
-           Cliente c = bbdd.buscarClientexDni(dni);
-            return (new Gson()).toJson(c);
+           List<Cliente> misClientes = bbdd.buscarClientexDni(dni);
+            return (new Gson()).toJson(misClientes);
         }catch (SQLException se) {
             return "List Products: " + se.getMessage();
         } catch (ClassNotFoundException c) {
@@ -56,7 +56,16 @@ public class Controlador implements DataAccess{
 
     @Override
     public String listProductosXPedido(String dni, String pedido){
-        return "Por hacer";
+        BBDDAccess bbdd = new BBDDAccess();
+
+        try{
+            List<Producto> listaProd = bbdd.listarProductoxPedido(dni, pedido);
+            return (new Gson()).toJson(listaProd);
+        }catch (SQLException se) {
+            return "List Products: " + se.getMessage();
+        } catch (ClassNotFoundException c) {
+            return "List Products: " + c.getMessage();
+        }
     };
 
     @Override

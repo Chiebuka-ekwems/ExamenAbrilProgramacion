@@ -17,11 +17,8 @@ public class BuscarClientexDniServlet extends HttpServlet {
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
 
-        if(dni != null && !dni.isEmpty()){
-            out.println((new Controlador()).findClienteXDNI(dni));
-        }else{
-            out.println("{\"error\": \"Debe proporcionar un codigo de producto\"}");
-        }
+        out.println((new Controlador()).findClienteXDNI(dni));
+
 
     }
 }

@@ -24,7 +24,7 @@ public class DataAccess_Old {
         String[] lines = data.split("\n");
         
         for (String line : lines){
-            listaProductosBase.add(Producto.cargarDesdeCSVPlus(line));
+            //listaProductosBase.add(Producto.cargarDesdeCSVPlus(line));
         }
         return listaProductosBase;
     }

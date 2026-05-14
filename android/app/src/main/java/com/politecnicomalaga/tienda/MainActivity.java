@@ -37,28 +37,9 @@ public class MainActivity extends AppCompatActivity {
 
     //Acciones
 
-    //El botón de añadir producto
-    public void addProduct(View v) {
-        //Revisar los edittext
-        String descripcion = ((EditText)findViewById(R.id.etDescProducto)).getText().toString();
-        String code = ((EditText)findViewById(R.id.etCodProducto)).getText().toString();
-        String stock = ((EditText)findViewById(R.id.etStockProducto)).getText().toString();
-        String precio = ((EditText)findViewById(R.id.etPrecio)).getText().toString();
-
-        //comprobar formato
-
-        Map<String,String> datos = new HashMap<>();
-        datos.put("descripcion",descripcion);
-        datos.put("code",code);
-        datos.put("precio",precio);
-        datos.put("stock",stock);
-
-
-        //añadir el producto al modelo
-        Controlador.getSingleton(this).addProduct(datos);
-        this.reaccionar("");
-
-
+    //El botón de listar clientes
+    public void listCliente(View v) {
+        Controlador.getSingleton(this).listarClientes();
     }
 
     public void listProduct(View v) {
@@ -66,26 +47,36 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void reaccionar(String error) {
+        ListView miListaEnPantalla = findViewById(R.id.listaProductos);
+        ArrayAdapter<String> miAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
 
-        if (error.isEmpty()) {
+        if (error == null || error.isEmpty()) {
             List<Map<String, String>> datos = Controlador.getSingleton(this).getData();
 
-            //Mostrarlos
-            ListView miListaEnPantalla = findViewById(R.id.listaProductos);
+            if (datos != null && !datos.isEmpty()) {
+                for (Map<String, String> item : datos) {
+                    String resultado = "";
 
-            ArrayAdapter<String> miAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
-            for (Map<String, String> unProducto : datos) {
-                String resultado = unProducto.get("d") + " - " + unProducto.get("c") + " - " + unProducto.get("p") + " - " + unProducto.get("s");
-                miAdapter.add(resultado);
+                    // Comprobamos qué tipo de dato estamos leyendo
+                    if ("cliente".equals(item.get("tipo"))) {
+                        resultado = "DNI: " + item.get("dni") +
+                                " | " + item.get("nombre") + " " + item.get("apellidos") +
+                                " | Tel: " + item.get("telefono");
+                    } else {
+                        resultado = "Cod: " + item.get("c") +
+                                " | " + item.get("d") +
+                                " | Precio: " + item.get("p") + "€" +
+                                " | Stock: " + item.get("s");
+                    }
+                    miAdapter.add(resultado);
+                }
+            } else {
+                miAdapter.add("No hay datos disponibles.");
             }
-
-            miListaEnPantalla.setAdapter(miAdapter);
         } else {
-            ListView miListaEnPantalla = findViewById(R.id.listaProductos);
-
-            ArrayAdapter<String> miAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
-            miAdapter.add(error);
-            miListaEnPantalla.setAdapter(miAdapter);
+            miAdapter.add("Error: " + error);
         }
+
+        miListaEnPantalla.setAdapter(miAdapter);
     }
 }

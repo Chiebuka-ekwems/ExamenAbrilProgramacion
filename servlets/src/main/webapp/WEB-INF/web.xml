@@ -41,6 +41,15 @@
     <url-pattern>/buscarCliente</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>ListarProductosxPedidos</servlet-name>
+    <servlet-class>com.politecnicomalaga.tienda.view.ListarProductosxPedidos</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListarProductosxPedidos</servlet-name>
+    <url-pattern>/buscarProductoxPedido</url-pattern>
+  </servlet-mapping>
+
 
 
 </web-app>
